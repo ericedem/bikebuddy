@@ -32,6 +32,41 @@
 
         <p class="help-block"> {{ message }} </p>
 
+
+        <div class="form-group" ng-class="{ 'has-success': form.work.$valid && submitted,
+                                            'has-error': form.work.$invalid && submitted }">
+          <label>Home</label>
+          <input type="text" class="form-control" ng-autocomplete ng-model="home.result"
+                  options="home.options"
+                  details="home.details"
+                  required
+                  mongoose-error/>
+          <p class="help-block"
+             ng-show="(form.password.$error.required) && submitted">
+            Home field required
+          </p>     
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.home }}
+          </p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.work.$valid && submitted,
+                                            'has-error': form.work.$invalid && submitted }">
+          <label>Work</label>
+          <input type="text" class="form-control" ng-autocomplete ng-model="work.result"
+                  options="work.options"
+                  details="work.details"
+                  required
+                  mongoose-error/>
+          <p class="help-block"
+             ng-show="(form.password.$error.required) && submitted">
+            Work field required
+          </p>     
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.work }}
+          </p>
+        </div>
+
         <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
       </form>
     </div>

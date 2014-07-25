@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -98,4 +99,50 @@ exports.me = function(req, res, next) {
  */
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
+};
+
+/**
+ * Return users similar to the requested user
+ */
+exports.similar = function(req, res, next) {
+  console.log(req.body.home);
+  console.log(req.body.work);
+  var homeQuery = {
+    home:{
+      $near:{
+        $geometry: {
+          type: 'Point',
+          // geospacial [lat, long]
+          coordinates: req.body.home
+        },
+        $maxDistance: 5000
+      }
+    }
+  };
+
+  var workQuery = {
+    work:{
+      $near:{
+        $geometry: {
+          type: 'Point',
+          coordinates: req.body.work
+        },
+        $maxDistance: 2000
+      }
+    }
+  }
+
+  User.find(homeQuery, {_id: 1}, function(err, userList) {
+    console.log(userList);
+    console.log(_.pluck(userList, '_id'));
+    workQuery._id = {
+      '$in': _.pluck(userList, '_id')
+    };
+    console.log(workQuery);
+    User.find(workQuery, {name: 1, email: 1, zip: 1}, function(err, userList) {
+      console.log(userList);
+      console.log(userList);
+      res.json(userList);
+    })
+  });
 };

@@ -35,8 +35,21 @@ User.find({}).remove(function() {
     provider: 'local',
     name: 'Test User',
     email: 'test@test.com',
-    password: 'test'
-  }, {
+    password: 'test',
+    home: [-121.853, 37.411],
+    work: [-122.025133, 37.417287],
+    zip: 95132
+  },
+  {
+    provider: 'local',
+    name: 'Eric Edem',
+    email: 'ericedem@gmail.com',
+    password: 'boo',
+    home: [-121.874, 37.409],
+    work: [-122.025133, 37.417287],
+    zip: 95132
+  },
+  {
     provider: 'local',
     role: 'admin',
     name: 'Admin',

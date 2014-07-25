@@ -9,14 +9,27 @@ angular.module('bikebuddyApp')
       $scope.submitted = true;
 
       if(form.$valid) {
+        // var neighborhood = _.find($scope.home.details.address_components, function(item) {
+        //   return item.types[0] === 'neighborhood';
+        // }).long_name;
+        var zip = _.find($scope.home.details.address_components, function(item) {
+          return item.types[0] === 'postal_code';
+        }).long_name;
+
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
+          home: [$scope.home.details.geometry.location.B,
+                 $scope.home.details.geometry.location.k],
+          work: [$scope.work.details.geometry.location.B,
+                 $scope.work.details.geometry.location.k],
+          // neighborhood: neighborhood,
+          zip: zip
         })
         .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
+          // Account created, redirect to route
+          $location.path('/route');
         })
         .catch( function(err) {
           err = err.data;

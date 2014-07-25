@@ -58,7 +58,7 @@ angular.module('bikebuddyApp')
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
-
+        console.log(user);
         return User.save(user,
           function(data) {
             $cookieStore.put('token', data.token);

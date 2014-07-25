@@ -7,14 +7,28 @@
 </header>
 
 <div class="container">
+  <div ng-show="isLoggedIn() && nearMe">
+    <b>Bikers near me</b>
+    <p ng-repeat="item in nearMe">
+      <b>name</b>: {{item.name}} <br/>
+      <b>email</b>: {{item.email}} <br/>
+      <b>zip</b>: {{item.zip}} <br/>
+    </p>
+  </div>
   <form class="location-form">
     <label>Privately find someone to bike with</label>
     <p class="input-group">
-      <input type="text" class="form-control" ng-autocomplete ng-model="homeAddrResult" options="homeAddrOptions" details="homeAddrDetails"/>
-      <input type="text" class="form-control" ng-autocomplete ng-model="workAddrResult" options="workAddrOptions" details="workAddrDetails"/>
+      <input type="text" class="form-control" ng-autocomplete ng-model="home.result" options="home.options" details="home.details"/>
+      <input type="text" class="form-control" ng-autocomplete ng-model="work.result" options="work.options" details="work.details"/>
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="getInfo()">Find a buddy</button>
+        <button type="submit" class="btn btn-primary" ng-click="getSimilar()">Find a buddy</button>
       </span>
+    </p>
+
+    <p ng-repeat="item in similar">
+      <b>name</b>: {{item.name}} <br/>
+      <b>email</b>: {{item.email}} <br/>
+      <b>zip</b>: {{item.zip}} <br/>
     </p>
   </form>
 </div>
