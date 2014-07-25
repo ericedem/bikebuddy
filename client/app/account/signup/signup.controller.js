@@ -25,7 +25,9 @@ angular.module('bikebuddyApp')
           work: [$scope.work.details.geometry.location.B,
                  $scope.work.details.geometry.location.k],
           // neighborhood: neighborhood,
-          zip: zip
+          zip: zip,
+          activity: $scope.activity,
+          account: $scope.account
         })
         .then( function() {
           // Account created, redirect to route

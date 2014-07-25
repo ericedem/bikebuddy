@@ -27,8 +27,11 @@ angular.module('bikebuddyApp')
         success(function(data) {
           $cookieStore.put('token', data.token);
           currentUser = User.get();
-          deferred.resolve(data);
-          return cb();
+          // wait until new user data is fetched
+          return currentUser.$promise.then(function() {
+            deferred.resolve(data);
+            return cb();
+          });
         }).
         error(function(err) {
           this.logout();

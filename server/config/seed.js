@@ -47,7 +47,9 @@ User.find({}).remove(function() {
     password: 'boo',
     home: [-121.874, 37.409],
     work: [-122.025133, 37.417287],
-    zip: 95132
+    zip: 95132,
+    commute: 169650034,
+    athlete: 409406
   },
   {
     provider: 'local',

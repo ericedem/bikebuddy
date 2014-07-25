@@ -88,6 +88,30 @@
           </p>
         </div>
 
+        <div class="form-group" ng-class="{ 'has-success': form.work.$valid && submitted,
+                                            'has-error': form.work.$invalid && submitted }">
+          <label>Strava Account ID</label>
+          <input type="text" class="form-control" ng-model="account"
+                  mongoose-error/>
+          <!-- <p class="help-block"
+             ng-show="(form.password.$error.required) && submitted">
+            Work field required
+          </p>  -->    
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.account }}
+          </p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.work.$valid && submitted,
+                                            'has-error': form.work.$invalid && submitted }">
+          <label>Strava Commute Activity ID</label>
+          <input type="text" class="form-control" ng-model="activity"
+                  mongoose-error/>
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ errors.activity }}
+          </p>
+        </div>
+
         <div>
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
             Sign up

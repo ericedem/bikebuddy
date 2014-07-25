@@ -139,7 +139,7 @@ exports.similar = function(req, res, next) {
       '$in': _.pluck(userList, '_id')
     };
     console.log(workQuery);
-    User.find(workQuery, {name: 1, email: 1, zip: 1}, function(err, userList) {
+    User.find(workQuery, {name: 1, email: 1, zip: 1, athlete: 1, commute: 1}, function(err, userList) {
       console.log(userList);
       console.log(userList);
       res.json(userList);
